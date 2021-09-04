@@ -2,10 +2,12 @@
 Contains a script to set up a new mac machine for me
 
 # Pre requisites
-1. Homebrew must be installed
 1. Willingess to grant `sudo` permisssions
 
 # The following actions will be taken
+## Homebrew setup
+1. Install Homebrew
+
 ## Git Setup
 1. Install updated latest `git` from Homebrew and replace default Apple `git`
 1. Setup .gitconfig
