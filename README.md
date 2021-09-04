@@ -6,6 +6,7 @@ Contains a script to set up a new mac machine for me
 1. Willingess to grant `sudo` permisssions
 
 # The following actions will be taken
+1. Install updated latest `git` from Homebrew and replace default Apple `git`
 1. Setup .gitconfig
 1. Setup default .gitignore with ingore files defined for macOS, Xcode, Swift, Objective C, Swift Package Manager
 1. Setup git bash completion
