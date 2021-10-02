@@ -26,4 +26,6 @@ Contains a script to set up a new mac machine for me
 1. Setup convenient command to create gif from video
 1. Setup command to restart audio daemon on Mac
 1. Setup command to restart bluetooth daemon on Mac
+1. Setup Alfred
+1. Setup Tower
 
