@@ -9,45 +9,21 @@ import ArgumentParser
 import Foundation
 
 extension Command {
+    /// Checks and installs Homebrew if needed
+    /// Runs the following command `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
     struct Homebrew: ParsableCommand {
         static var configuration: CommandConfiguration {
             .init(
-                commandName: "homebrew",
+                commandName: "brew",
                 abstract: "Setup Homebrew",
                 subcommands: []
             )
         }
 
         func run() throws {
-            try! Command.launch(tool: URL(fileURLWithPath: "/usr/bin/which"), arguments: ["brew"]) { (status, outputData, errorData) in
-                let output = String(data: outputData, encoding: .utf8) ?? ""
-                let error = String(data: errorData, encoding: .utf8) ?? ""
-                print("done, status: \(status), output: \(output), error: \(error)")
-            }
+            let installed = try Command.checkIfExists(commandString: Homebrew._commandName)
+            if installed { return }
+            
         }
-    }
-
-    static func launch(tool: URL, arguments: [String], completionHandler: @escaping (Int32, Data, Data) -> Void) throws {
-        let task = Process()
-        if #available(macOS 10.13, *) {
-            task.executableURL = tool
-            task.arguments = arguments
-
-            let outputPipe = Pipe()
-            let errorPipe = Pipe()
-
-            task.standardOutput = outputPipe
-            task.standardError = errorPipe
-
-            try task.run()
-
-            let outputData = outputPipe.fileHandleForReading.readDataToEndOfFile()
-            let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
-
-            completionHandler(task.terminationStatus, outputData, errorData)
-        } else {
-            // Fallback on earlier versions
-        }
-
     }
 }
